@@ -1,8 +1,7 @@
 import abc
 import random
 
-from . import diceast as ast
-from . import errors
+from . import diceast as ast, errors
 
 __all__ = (
     "Number",
