@@ -3,8 +3,8 @@
 [![PyPI version shields.io](https://img.shields.io/pypi/v/d20.svg)](https://pypi.python.org/pypi/d20/)
 [![PyPI license](https://img.shields.io/pypi/l/d20.svg)](https://pypi.python.org/pypi/d20/)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/d20.svg)](https://pypi.python.org/pypi/d20/)
-![](https://github.com/avrae/d20/workflows/Test%20Package/badge.svg)
-[![codecov](https://codecov.io/gh/avrae/d20/branch/master/graph/badge.svg)](https://codecov.io/gh/avrae/d20)
+![](https://github.com/zhudotexe/d20/workflows/Test%20Package/badge.svg)
+[![codecov](https://codecov.io/gh/zhudotexe/d20/branch/master/graph/badge.svg)](https://codecov.io/gh/zhudotexe/d20)
 [![Documentation Status](https://readthedocs.org/projects/d20/badge/?version=latest)](https://d20.readthedocs.io/en/latest/start.html?badge=latest)
 
 
