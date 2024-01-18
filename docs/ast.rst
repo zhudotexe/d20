@@ -6,26 +6,20 @@ for the Expression object returned by ``roll(...)expr``, check out :ref:`Express
 
 .. autoclass:: d20.ast.ChildMixin
 
-    .. method:: children
-        :property:
+    .. attribute:: children
+        :type: list[Node]
 
         (read-only) The children of this object, usually used for traversing a tree.
 
-        :rtype: list[Node]
-
-    .. method:: left
-        :property:
+    .. attribute:: left
+        :type: Node
 
         The leftmost child of this object, usually used for traversing a tree.
 
-        :rtype: Node
-
-    .. method:: right
-        :property:
+    .. attribute:: right
+        :type: Node
 
         The rightmost child of this object, usually used for traversing a tree..
-
-        :rtype: Node
 
     .. automethod:: set_child
 
