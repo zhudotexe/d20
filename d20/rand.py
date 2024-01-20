@@ -23,7 +23,6 @@ _SeedT = Optional[Union[int, Sequence[int]]]
 random_impl = random.Random()
 
 # if np is installed and it has the random module, make use of PCG64
-# todo tests, docs
 try:
     import numpy.random  # added in numpy 1.17
     from numpy.random import Generator, SeedSequence

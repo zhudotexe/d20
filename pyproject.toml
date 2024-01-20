@@ -28,7 +28,7 @@ dependencies = [
 
 [project.optional-dependencies]
 numpy = [
-    "transformers>=4.0.0,<5.0.0",
+    "numpy>=1.17.0,<2.0.0",
 ]
 
 [project.urls]

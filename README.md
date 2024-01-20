@@ -22,8 +22,12 @@ A fast, powerful, and extensible dice engine for D&D, d20 systems, and any other
 **Requires Python 3.6+**.
 
 ```bash
-python3 -m pip install -U d20
+pip install d20
 ```
+
+If `numpy` is installed, `d20` will use an RNG algorithm supplied in NumPy (PCG64 or PCG64DXSM) rather than the Python
+default (MT2002). See [this issue](https://github.com/avrae/d20/issues/7) for more details. You can install `d20` with
+NumPy by using `pip install "d20[numpy]"`.
 
 ## Quickstart
 
