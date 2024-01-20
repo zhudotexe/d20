@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "d20"
+version = "1.1.2"
+authors = [
+    { name = "Andrew Zhu", email = "andrew@zhu.codes" },
+]
+description = "A formal grammar-based dice parser and roller for D&D and other dice systems."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    # https://pypi.org/classifiers/
+    "Development Status :: 5 - Production/Stable",
+    "Topic :: Games/Entertainment :: Board Games",
+    "Topic :: Games/Entertainment :: Role-Playing",
+]
+dependencies = [
+    "cachetools>=3.1.0,<6.0.0",
+    "lark>=0.9.0,<2.0.0",
+]
+
+[project.optional-dependencies]
+numpy = [
+    "transformers>=4.0.0,<5.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/zhudotexe/d20"
+"Bug Tracker" = "https://github.com/zhudotexe/d20/issues"
+
+[tool.black]
+line-length = 120
+preview = true
+
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+line_length = 120
+known_first_party = ["d20"]
+# I am bound by pycharm's import autosorting rules
+no_lines_before = "LOCALFOLDER"
+reverse_relative = true
+combine_as_imports = true

@@ -4,8 +4,17 @@ import random
 from . import diceast as ast, errors, rand
 
 __all__ = (
-    "Number", "Expression", "Literal", "UnOp", "BinOp", "Parenthetical", "Set", "Dice", "Die",
-    "SetOperator", "SetSelector"
+    "Number",
+    "Expression",
+    "Literal",
+    "UnOp",
+    "BinOp",
+    "Parenthetical",
+    "Set",
+    "Dice",
+    "Die",
+    "SetOperator",
+    "SetSelector",
 )
 
 
@@ -96,6 +105,7 @@ class Number(abc.ABC, ast.ChildMixin):  # num
 
 class Expression(Number):
     """Expressions are usually the root of all Number trees."""
+
     __slots__ = ("roll", "comment")
 
     def __init__(self, roll, comment, **kwargs):
@@ -128,6 +138,7 @@ class Expression(Number):
 
 class Literal(Number):
     """A literal integer or float."""
+
     __slots__ = ("values", "exploded")
 
     def __init__(self, value, **kwargs):
@@ -165,12 +176,10 @@ class Literal(Number):
 
 class UnOp(Number):
     """Represents a unary operation."""
+
     __slots__ = ("op", "value")
 
-    UNARY_OPS = {
-        "-": lambda v: -v,
-        "+": lambda v: +v
-    }
+    UNARY_OPS = {"-": lambda v: -v, "+": lambda v: +v}
 
     def __init__(self, op, value, **kwargs):
         """
@@ -203,6 +212,7 @@ class UnOp(Number):
 
 class BinOp(Number):
     """Represents a binary operation."""
+
     __slots__ = ("op", "left", "right")
 
     BINARY_OPS = {
@@ -259,6 +269,7 @@ class BinOp(Number):
 
 class Parenthetical(Number):
     """Represents a value inside parentheses."""
+
     __slots__ = ("value", "operations")
 
     def __init__(self, value, operations=None, **kwargs):
@@ -294,6 +305,7 @@ class Parenthetical(Number):
 
 class Set(Number):
     """Represents a set of values."""
+
     __slots__ = ("values", "operations")
 
     def __init__(self, values, operations=None, **kwargs):
@@ -328,6 +340,7 @@ class Set(Number):
 
 class Dice(Set):
     """A set of Die."""
+
     __slots__ = ("num", "size", "_context", "_rng")
 
     def __init__(self, num, size, values, operations=None, context=None, rng=rand.random_impl, **kwargs):
@@ -361,11 +374,13 @@ class Dice(Set):
 
     def __copy__(self):
         return Dice(num=self.num, size=self.size, context=self._context, rng=self._rng,
-                    values=self.values.copy(), operations=self.operations.copy())
+            values=self.values.copy(),
+            operations=self.operations.copy())
 
 
 class Die(Number):  # part of diceexpr
     """Represents a single die."""
+
     __slots__ = ("size", "values", "_context", "_rng")
 
     def __init__(self, size, values, context=None, rng=rand.random_impl):
@@ -400,11 +415,11 @@ class Die(Number):  # part of diceexpr
         return []
 
     def _add_roll(self):
-        if self.size != '%' and self.size < 1:
+        if self.size != "%" and self.size < 1:
             raise errors.RollValueError("Cannot roll a 0-sided die.")
         if self._context:
             self._context.count_roll()
-        if self.size == '%':
+        if self.size == "%":
             n = Literal(self._rng.randrange(10) * 10)
         else:
             n = Literal(self._rng.randrange(self.size) + 1)  # 200ns faster than randint(1, self._size)
@@ -432,6 +447,7 @@ class Die(Number):  # part of diceexpr
 # selecting on Dice will always return Die
 class SetOperator:  # set_op, dice_op
     """Represents an operation on a set."""
+
     __slots__ = ("op", "sels")
 
     def __init__(self, op, sels):
@@ -482,7 +498,7 @@ class SetOperator:  # set_op, dice_op
             "ra": self.explode_once,
             "e": self.explode,
             "mi": self.minimum,
-            "ma": self.maximum
+            "ma": self.maximum,
         }
 
         operations[self.op](target)
@@ -576,6 +592,7 @@ class SetOperator:  # set_op, dice_op
 
 class SetSelector:  # selector
     """Represents a selection on a set."""
+
     __slots__ = ("cat", "num")
 
     def __init__(self, cat, num):
@@ -600,13 +617,7 @@ class SetSelector:  # selector
         :return: The targets in the set.
         :rtype: set of Number
         """
-        selectors = {
-            "l": self.lowestn,
-            "h": self.highestn,
-            "<": self.lessthan,
-            ">": self.morethan,
-            None: self.literal
-        }
+        selectors = {"l": self.lowestn, "h": self.highestn, "<": self.lessthan, ">": self.morethan, None: self.literal}
 
         selected = selectors[self.cat](target)
         if max_targets is not None:
@@ -614,10 +625,10 @@ class SetSelector:  # selector
         return set(selected)
 
     def lowestn(self, target):
-        return sorted(target.keptset, key=lambda n: n.total)[:self.num]
+        return sorted(target.keptset, key=lambda n: n.total)[: self.num]
 
     def highestn(self, target):
-        return sorted(target.keptset, key=lambda n: n.total, reverse=True)[:self.num]
+        return sorted(target.keptset, key=lambda n: n.total, reverse=True)[: self.num]
 
     def lessthan(self, target):
         return [n for n in target.keptset if n.total < self.num]

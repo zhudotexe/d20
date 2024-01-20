@@ -19,26 +19,20 @@ for the Expression object returned by ``parse(...)``, check out :ref:`Abstract S
 
         The annotation on this Number, if any.
 
-    .. method:: children
-        :property:
+    .. attribute:: children
+        :type: list[Number]
 
         (read-only) The children of this Number, usually used for traversing the expression tree.
 
-        :rtype: list[Number]
-
-    .. method:: left
-        :property:
+    .. attribute:: left
+        :type: Number
 
         The leftmost child of this Number, usually used for traversing the expression tree.
 
-        :rtype: Number
-
-    .. method:: right
-        :property:
+    .. attribute:: right
+        :type: Number
 
         The rightmost child of this Number, usually used for traversing the expression tree.
-
-        :rtype: Number
 
     .. automethod:: set_child
 
