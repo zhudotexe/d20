@@ -1,6 +1,6 @@
-import d20
-
 import pytest
+
+import d20
 
 
 @pytest.fixture(autouse=True, scope="function")

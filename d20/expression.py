@@ -373,9 +373,14 @@ class Dice(Set):
         return f"<Dice num={self.num} size={self.size} values={self.values} operations={self.operations}>"
 
     def __copy__(self):
-        return Dice(num=self.num, size=self.size, context=self._context, rng=self._rng,
+        return Dice(
+            num=self.num,
+            size=self.size,
+            context=self._context,
+            rng=self._rng,
             values=self.values.copy(),
-            operations=self.operations.copy())
+            operations=self.operations.copy(),
+        )
 
 
 class Die(Number):  # part of diceexpr

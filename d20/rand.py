@@ -12,11 +12,11 @@ Thanks to @posita for inspiring the implementation of NumpyRandom.
 """
 
 import random
-from typing import Any, NewType, Optional, Sequence, TYPE_CHECKING, Type, Union
+from typing import TYPE_CHECKING, Any, NewType, Optional, Sequence, Type, Union
 
 __all__ = ("random_impl",)
 
-_BitGenT = NewType('_BitGenT', Any)
+_BitGenT = NewType("_BitGenT", Any)
 _SeedT = Optional[Union[int, Sequence[int]]]
 
 # the default random implementation - just use stdlib random (MT2002)
@@ -39,7 +39,6 @@ try:
         except ImportError:
             pass
 
-
     class NumpyRandom(random.Random):
         _gen: Generator
 
@@ -56,9 +55,9 @@ try:
             # Adapted from random.SystemRandom, see
             # https://github.com/python/cpython/blob/8c21941ddafdf4925170f9cea22e2382dd3b0184/Lib/random.py#L800
             if k < 0:
-                raise ValueError('number of bits must be non-negative')
+                raise ValueError("number of bits must be non-negative")
             numbytes = (k + 7) // 8  # bits / 8 and rounded up
-            x = int.from_bytes(self.randbytes(numbytes), 'big')
+            x = int.from_bytes(self.randbytes(numbytes), "big")
             return x >> (numbytes * 8 - k)  # trim excess bits
 
         def randbytes(self, n: int) -> bytes:
@@ -77,7 +76,6 @@ try:
 
         def setstate(self, state):
             self._gen.bit_generator.state = state
-
 
     if hasattr(numpy.random, "PCG64DXSM"):  # available in numpy 1.21 and up
         random_impl = NumpyRandom(numpy.random.PCG64DXSM)
